@@ -1,0 +1,21 @@
+version: "3.9"
+networks:
+  mongo-net:
+    driver: bridge
+services:
+  mongo:
+    image: mongo:6
+    networks:
+      - mongo-net
+    ports:
+      - 27017:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--port","27017", "--config", "/data/config/mongodb.conf"]
+    volumes:
+      - ./ssl:/data/ssl
+      - ./config:/data/config
+      - ./init/init.js:/docker-entrypoint-initdb.d/init.js
+      - ./sh/:/scripts/
+      - ./keyfile:/data/keyfile:ro
+    extra_hosts:
+      - mongo.example.com:127.0.0.1
