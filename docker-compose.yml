@@ -19,3 +19,8 @@ services:
       - ./keyfile:/data/keyfile:ro
     extra_hosts:
       - mongo.example.com:127.0.0.1
+    healthcheck:
+      test: ["CMD", "/scripts/test.sh"]
+      interval: 30s
+      timeout: 10s
+      start_period: 3m

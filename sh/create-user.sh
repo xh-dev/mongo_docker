@@ -6,5 +6,5 @@ mongosh mongodb://mongo.example.com:27017 --tls \
 use admin
 db.createUser({user:"root",pwd:"Abcd1234",roles:[{role:"userAdminAnyDatabase",db:"admin"}]})
 db.auth("root", "Abcd1234")
-db.createUser({user:"user",pwd:"Abcd1234",roles:[{role:"readWrite",db:"testDB"}]})
+db.createUser({user:"xeth",pwd:"Abcd1234",roles:[{role:"readWrite",db:"testDB"}]})
 EOF
