@@ -1,7 +1,10 @@
 #! /bin/bash
 pushd ssl
-cat server-cert.pem server-key.pem > mongo-server-key.pem
+cat server-1-cert.pem server-1-key.pem > mongo-server-1-key.pem
+cat server-2-cert.pem server-2-key.pem > mongo-server-2-key.pem
+
 cat ca-cert.pem client-cert.pem > mongo-server-ca.pem
+
 cat ca-cert.pem > mongo-client-ca.pem
 cat client-cert.pem client-key.pem > mongo-client-key.pem
 popd

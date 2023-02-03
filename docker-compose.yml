@@ -3,24 +3,45 @@ networks:
   mongo-net:
     driver: bridge
 services:
-  mongo:
+  mongo-1:
     image: mongo:6
     networks:
       - mongo-net
     ports:
       - 27017:27017
     restart: always
-    entrypoint: ["/usr/bin/mongod", "--port","27017", "--config", "/data/config/mongodb.conf"]
+    entrypoint: ["/usr/bin/mongod", "--config", "/data/config/mongodb.conf"]
     volumes:
       - ./ssl:/data/ssl
-      - ./config:/data/config
-      - ./init/init.js:/docker-entrypoint-initdb.d/init.js
-      - ./sh/:/scripts/
+      - ./config-1:/data/config
+      - ./sh-1/:/scripts/
       - ./keyfile:/data/keyfile:ro
     extra_hosts:
-      - mongo.example.com:127.0.0.1
+      - mongo-1.example.com:127.0.0.1
+      - mongo-2.example.com:172.17.0.1
     healthcheck:
       test: ["CMD", "/scripts/test.sh"]
       interval: 30s
       timeout: 10s
-      start_period: 3m
+      start_period: 10s
+  mongo-2:
+    image: mongo:6
+    networks:
+      - mongo-net
+    ports:
+      - 27027:27027
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--config", "/data/config/mongodb.conf"]
+    volumes:
+      - ./ssl:/data/ssl
+      - ./config-2:/data/config
+      - ./sh-2/:/scripts/
+      - ./keyfile:/data/keyfile:ro
+    extra_hosts:
+      - mongo-1.example.com:172.17.0.1
+      - mongo-2.example.com:127.0.0.1
+    healthcheck:
+      test: ["CMD", "/scripts/test.sh"]
+      interval: 30s
+      timeout: 10s
+      start_period: 10s

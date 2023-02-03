@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mongosh mongodb://mongo.example.com:27017 --tls \
+mongosh mongodb://mongo-1.example.com:27017 --tls \
   --tlsCAFile /data/ssl/mongo-client-ca.pem \
   --tlsCertificateKeyFile /data/ssl/mongo-client-key.pem <<EOF
 use admin

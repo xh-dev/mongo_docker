@@ -10,11 +10,13 @@ function reportError() {
 done_signal="/scripts/done-process"
 
 if [ ! -f "$done_signal" ]; then
-  ./init.sh
+  /scripts/init.sh >> /scripts/op.log
+  # /scripts/test1.sh
   reportError $? "test 1 failed"
 fi
 if [ ! -f "$done_signal" ]; then
-  ./create-user.sh
+  /scripts/create-user.sh >> /scripts/op.log
+  # /scripts/test1.sh
   reportError $? "test 2 failed"
 fi
 touch $done_signal
