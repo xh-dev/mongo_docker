@@ -14,11 +14,8 @@ services:
     volumes:
       - ./ssl:/data/ssl
       - ./config-1:/data/config
-      - ./sh-1/:/scripts/
+      - ./sh/:/scripts/
       - ./keyfile:/data/keyfile:ro
-    extra_hosts:
-      - mongo-1.example.com:127.0.0.1
-      - mongo-2.example.com:172.17.0.1
     healthcheck:
       test: ["CMD", "/scripts/test.sh"]
       interval: 30s
@@ -35,13 +32,4 @@ services:
     volumes:
       - ./ssl:/data/ssl
       - ./config-2:/data/config
-      - ./sh-2/:/scripts/
       - ./keyfile:/data/keyfile:ro
-    extra_hosts:
-      - mongo-1.example.com:172.17.0.1
-      - mongo-2.example.com:127.0.0.1
-    healthcheck:
-      test: ["CMD", "/scripts/test.sh"]
-      interval: 30s
-      timeout: 10s
-      start_period: 10s

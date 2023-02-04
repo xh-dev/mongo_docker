@@ -9,5 +9,11 @@ var config = {
         }
     ]
 };
-rs.initiate(config, { force: true });
-rs.status();
+try{
+  rs.initiate(config, { force: true });
+  rs.status();
+}
+exception(e){
+  console.log(e);
+  exit(1)
+}
